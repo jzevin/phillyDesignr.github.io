@@ -2,7 +2,8 @@
   const $ = document.querySelector.bind(document);
   const vCtrl = (function () {
     const dom = {
-      dateTime: $('.date-time')
+      dateTime: $('.date-time'),
+      titleDateTime: $('.title-daytime')
     }
     return { dom };
   })();
@@ -14,6 +15,9 @@
     }
     function getAmPm(date) {
       return date.getHours() >= 12 ? 'pm' : 'am';
+    }
+    function getTitleTime(date) {
+      return date.getHours() >= 12 ? 'evening' : 'morning';
     }
     function getHour(date) {
       let hrs = date.getHours();
@@ -40,6 +44,7 @@
                 </span>
             `.replace(/\s/g, '');
       v.dom.dateTime.innerHTML = dateTimeHtml;
+      v.dom.titleDateTime.innerHTML = `${getTitleTime(date)}`;
     }
     getDateTime();
     setInterval(getDateTime, 1000);
